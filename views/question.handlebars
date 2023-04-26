@@ -1,0 +1,81 @@
+<h1>Question</h1>
+
+<p>{{question}}</p>
+
+{{#each answers}}
+<button class="answer" data-correct="{{this.isCorrect}}">{{this.answerContent}}</button> <br> <br>
+{{/each}}
+
+Số tiền hiện tại: <div class="current-price"></div>
+<button id="give-up">Bỏ cuộc</button>
+
+<script>
+
+    var getAnswers = document.querySelectorAll('.answer');
+    var url = window.location.href.split('/');
+    var score = url[url.length-1];
+    var currentScore = Number.parseInt(score);
+    var urlObj = getQueryParams(window.location.href);
+    var giveUpBtn = document.querySelector('#give-up');
+
+    giveUpBtn.onclick = function(e) {
+        window.location.href = `http://localhost:3000/winner/${currentScore}?username=${urlObj.username}&money=${map.get(currentScore)}`;
+    }
+
+    //price map
+    const map = new Map([
+        [0, '0 đồng'],
+        [1, '200.000 đồng'],
+        [2, '400.000 đồng'],
+        [3, '600.000 đồng'],
+        [4, '1.000.000 đồng'],
+        [5, '2.000.000 đồng'],
+        [6, '3.000.000 đồng'],
+        [7, '6.000.000 đồng'],
+        [8, '10.000.000 đồng'],
+        [9, '14.000.000 đồng'],
+        [10, '22.000.000 đồng'],
+        [11, '30.000.000 đồng'],
+        [12, '40.000.000 đồng'],
+        [13, '80.000.000 đồng'],
+        [14, '150.000.000 đồng'],
+        [15, '250.000.000 đồng']
+    ])
+
+    if(currentScore == 15){
+        window.location.href = `http://localhost:3000/winner/${currentScore}?username=${urlObj.username}&money=${map.get(15)}`;
+    }
+
+    if(map.has(currentScore) == false) {
+        window.location.href = 'http://localhost:3000';
+    } else {
+        var priceField = document.querySelector('.current-price');
+        priceField.innerText = map.get(currentScore);
+    }
+    
+    function getQueryParams(url) {
+        const paramArr = url.slice(url.indexOf('?') + 1).split('&');
+        const params = {};
+        paramArr.map(param => {
+            const [key, val] = param.split('=');
+            params[key] = decodeURIComponent(val);
+        })
+        return params;
+    }
+    
+    for(let i=0;i<getAnswers.length;i++){
+
+        getAnswers[i].onclick = function(e) {
+            if(getAnswers[i].getAttribute('data-correct') == 1){
+                score = Number.parseInt(score) + 1;
+                alert('Trả lời đúng');
+                window.location.href = `http://localhost:3000/play/${score}?username=${urlObj.username}`;
+            } else {
+                alert('Trả lời sai');
+                window.location.href = `http://localhost:3000/winner/${0}?username=${urlObj.username}&money=${map.get(0)}`;
+            }
+        }
+
+    }
+
+</script>

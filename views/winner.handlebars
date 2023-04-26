@@ -1,0 +1,23 @@
+<h1>Cảm ơn <span class="print-name"></span> đã tham gia</h1>
+
+<h3>Đây là số tiền bạn nhận được: <span class="print-money"></span></h3> 
+
+<a href="/">Trang chủ</a> <br>
+<a href="/rank">Bảng xếp hạng</a>
+
+<script>
+    function getQueryParams(url) {
+        const paramArr = url.slice(url.indexOf('?') + 1).split('&');
+        const params = {};
+        paramArr.map(param => {
+            const [key, val] = param.split('=');
+            params[key] = decodeURIComponent(val);
+        })
+        return params;
+    }
+
+    var userObj = getQueryParams(window.location.href);
+    document.querySelector('.print-name').innerText = userObj.username.replace('+', ' ');
+    document.querySelector('.print-money').innerText = userObj.money;
+
+</script>

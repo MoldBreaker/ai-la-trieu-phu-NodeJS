@@ -1,0 +1,55 @@
+<h1>Bảng Xếp Hạng</h1>
+
+<table width="50%">
+    <tr>
+        <th>TOP</th>
+        <th>Tên</th>
+        <th>Số tiền nhận được</th>
+        <th>Đã chơi lúc</th>
+    </tr>
+    <tr>
+        <td>TOP 1:</td>
+        <td>{{result.0.username}}</td>
+        <td>{{result.0.money}}</td>
+        <td>{{result.0.playedAt}}</td>
+    </tr>
+    <tr>
+        <td>TOP 2:</td>
+        <td>{{result.1.username}}</td>
+        <td>{{result.1.money}}</td>
+        <td>{{result.1.playedAt}}</td>
+    </tr>
+    <tr>
+        <td>TOP 3:</td>
+        <td>{{result.2.username}}</td>
+        <td>{{result.2.money}}</td>
+        <td>{{result.2.playedAt}}</td>
+    </tr>
+    <tr>
+        <td>TOP 4:</td>
+        <td>{{result.3.username}}</td>
+        <td>{{result.3.money}}</td>
+        <td>{{result.3.playedAt}}</td>
+    </tr>
+    <tr>
+        <td>TOP 5:</td>
+        <td>{{result.4.username}}</td>
+        <td>{{result.4.money}}</td>
+        <td>{{result.4.playedAt}}</td>
+    </tr>
+</table>
+<a href="/">Quay lại</a>
+
+<style>
+    table, th, td {
+        border-collapse: collapse;
+    }
+
+    th{
+        border: 2.5px solid black;
+    }
+
+    table, td {
+        border: 1px solid black;
+    }
+</style>
